@@ -1,4 +1,4 @@
-import { app, BrowserWindow, nativeTheme, nativeImage, ipcMain } from 'electron'
+import { app, BrowserWindow, nativeTheme, powerSaveBlocker, ipcMain } from 'electron'
 import path from 'path'
 import os from 'os'
 
@@ -6,6 +6,7 @@ import { handle } from './handlers'
 
 // needed in case process is undefined under Linux
 const platform = process.platform || os.platform()
+let powerSaveBlockerId: number;
 
 try {
   if (platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
@@ -30,7 +31,7 @@ function createWindow () {
    */
   mainWindow = new BrowserWindow({
     icon: appIcon,
-    width: 1400,
+    width: 660,
     height: 660,
     useContentSize: true,
     autoHideMenuBar: true,
@@ -39,7 +40,7 @@ function createWindow () {
       // More info: https://v2.quasar.dev/quasar-cli-vite/developing-electron-apps/electron-preload-script
       preload: path.resolve(__dirname, process.env.QUASAR_ELECTRON_PRELOAD)
     },
-    show:false
+    show:true
   })
 
   console.log(process.env.APP_URL)
@@ -92,4 +93,18 @@ if (!app.requestSingleInstanceLock()) {
       createWindow()
     }
   })
+
+  ipcMain.on('toggle-power-save-block', (event, shouldBlock) => {
+  if (shouldBlock) {
+    if (!powerSaveBlocker.isStarted(powerSaveBlockerId)) {
+      powerSaveBlockerId = powerSaveBlocker.start('prevent-app-suspension');
+      console.log('Power Save Blocker started');
+    }
+  } else {
+    if (powerSaveBlocker.isStarted(powerSaveBlockerId)) {
+      powerSaveBlocker.stop(powerSaveBlockerId);
+      console.log('Power Save Blocker stopped');
+    }
+  }
+});
 }

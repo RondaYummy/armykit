@@ -1,69 +1,79 @@
 <template>
   <q-page class="">
-    <q-card flat class="bg-transparent">
+    <q-card flat
+            class="bg-transparent">
       <q-card-section>
         <div class="text-h6">{{ $t("settings.system") }}</div>
         <q-separator class="q-mt-xs q-mb-xs" />
-        <q-item
-          class=""
-          v-ripple
-          clickable
-          @click="setSystemAutoUpdate(!systemAutoUpdate)"
-        >
+        <q-item class=""
+                v-ripple
+                clickable
+                @click="setSystemAutoUpdate(!systemAutoUpdate)">
           <q-item-section>
             <q-item-label>{{ $t("settings.autoUpdates") }}</q-item-label>
             <q-item-label caption>{{
               $t("settings.autoUpdatesDescription")
             }}</q-item-label>
           </q-item-section>
-          <q-item-section side top>
-            <q-toggle
-              color="primary"
-              v-model="systemAutoUpdate"
-              @update:model-value="setSystemAutoUpdate"
-            />
+          <q-item-section side
+                          top>
+            <q-toggle color="primary"
+                      v-model="systemAutoUpdate"
+                      @update:model-value="setSystemAutoUpdate" />
           </q-item-section>
         </q-item>
 
-        <q-item
-          class=""
-          v-ripple
-          clickable
-          @click="setSystemAutoStartup(!systemAutoStartup)"
-        >
+        <q-item class=""
+                v-ripple
+                clickable
+                @click="setSystemAutoStartup(!systemAutoStartup)">
           <q-item-section>
             <q-item-label>{{ $t("settings.autoStartup") }}</q-item-label>
             <q-item-label caption>{{
               $t("settings.autoStartupDescription")
             }}</q-item-label>
           </q-item-section>
-          <q-item-section side top>
-            <q-toggle
-              color="primary"
-              v-model="systemAutoStartup"
-              @update:model-value="setSystemAutoStartup"
-            />
+          <q-item-section side
+                          top>
+            <q-toggle color="primary"
+                      v-model="systemAutoStartup"
+                      @update:model-value="setSystemAutoStartup" />
           </q-item-section>
         </q-item>
 
-        <q-item
-          class=""
-          v-ripple
-          clickable
-          @click="setSystemHideInTray(!systemHideInTray)"
-        >
+        <q-item class=""
+                v-ripple
+                clickable
+                @click="setSystemHideInTray(!systemHideInTray)">
           <q-item-section>
             <q-item-label>{{ $t("settings.hideTray") }}</q-item-label>
             <q-item-label caption>{{
               $t("settings.hideTrayDescription")
             }}</q-item-label>
           </q-item-section>
-          <q-item-section side top>
-            <q-toggle
-              color="primary"
-              v-model="systemHideInTray"
-              @update:model-value="setSystemHideInTray"
-            />
+          <q-item-section side
+                          top>
+            <q-toggle color="primary"
+                      v-model="systemHideInTray"
+                      @update:model-value="setSystemHideInTray" />
+          </q-item-section>
+        </q-item>
+
+        <q-item class=""
+                v-ripple
+                clickable
+                @click="setPowerSaveBlocker(!powerSaveBlocker)">
+          <q-item-section>
+            <q-item-label>{{ $t("settings.powerSaveBlockerTitle") }}</q-item-label>
+            <q-item-label caption>{{
+              $t("settings.powerSaveBlockerDescription")
+            }}</q-item-label>
+          </q-item-section>
+          <q-item-section side
+                          top>
+            <q-toggle color="primary"
+                      v-model="powerSaveBlocker"
+                      @update:model-value="setSystemHideInTray" />
           </q-item-section>
         </q-item>
 
@@ -102,12 +112,13 @@
                                 </q-popup-proxy>
                             </q-icon>
                             </template>
-                        </q-input>
-                    </div>
+</q-input>
+</div>
 
-                    <div class="col-6 q-pl-xs">
-                        <q-input outlined v-model="sheduleEndTime" mask="time" :rules="['time']" label="End time" :disable="!systemSheduleEnabled">
-                            <template v-slot:append>
+<div class="col-6 q-pl-xs">
+  <q-input outlined v-model="sheduleEndTime" mask="time" :rules="['time']" label="End time"
+                                                                                                                          :disable="!systemSheduleEnabled">
+    <template v-slot:append>
                             <q-icon name="access_time" class="cursor-pointer">
                                 <q-popup-proxy cover transition-show="scale" transition-hide="scale">
                                 <q-time v-model="sheduleEndTime">
@@ -118,77 +129,70 @@
                                 </q-popup-proxy>
                             </q-icon>
                             </template>
-                        </q-input>
-                    </div>
-                </div>
-                <q-select outlined v-model="sheduleActivity" type="number" class="" :options="sheduleActivityOptions" @update:model-value="setSheduleActivity" label="Replacing activity" :disable="!systemSheduleEnabled" />
-            </q-card-section> -->
+  </q-input>
+</div>
+</div>
+<q-select outlined v-model="sheduleActivity" type="number" class="" :options="sheduleActivityOptions" @update:model-value="setSheduleActivity"
+                                                                                                                        label="Replacing activity"
+                                                                                                                        :disable="!systemSheduleEnabled" />
+</q-card-section> -->
 
       <!-- END TODO -->
 
       <q-card-section>
         <div class="text-h6">IT Army of Ukraine</div>
-        <span
-          >{{ $t("settings.idDescription") }}
-          <a
-            href="https://itarmy.com.ua/statistics/"
-            target="_blank"
-            rel="noopener noreferrer"
-            >https://itarmy.com.ua</a
-          >
+        <span>{{ $t("settings.idDescription") }}
+          <a href="https://itarmy.com.ua/statistics/"
+             target="_blank"
+             rel="noopener noreferrer">https://itarmy.com.ua</a>
         </span>
         <q-separator class="q-mt-xs q-mb-sm" />
-        <q-input
-          outlined
-          label="IT Army ID"
-          v-model="itArmyUUID"
-          @update:model-value="setItArmyUUID"
-          debounce="500"
-          type="number"
-        />
-        <q-input
-          outlined
-          label="IT Army API Key"
-          class="q-mt-sm"
-          v-model="itArmyAPIKey"
-          @update:model-value="setItArmyAPIKey"
-          debounce="500"
-          type="password"
-        />
+        <q-input outlined
+                 label="IT Army ID"
+                 v-model="itArmyUUID"
+                 @update:model-value="setItArmyUUID"
+                 debounce="500"
+                 type="number" />
+        <q-input outlined
+                 label="IT Army API Key"
+                 class="q-mt-sm"
+                 v-model="itArmyAPIKey"
+                 @update:model-value="setItArmyAPIKey"
+                 debounce="500"
+                 type="password" />
       </q-card-section>
 
       <q-card-section>
         <div class="text-h6">{{ $t("settings.look") }}</div>
         <q-separator class="q-mt-xs q-mb-xs" />
-        <q-item class="" v-ripple clickable @click="setDarkMode(!guiDarkMode)">
+        <q-item class=""
+                v-ripple
+                clickable
+                @click="setDarkMode(!guiDarkMode)">
           <q-item-section>
             <q-item-label>{{ $t("settings.darkMode") }}</q-item-label>
           </q-item-section>
-          <q-item-section side top>
-            <q-toggle
-              color="primary"
-              v-model="guiDarkMode"
-              @update:model-value="setDarkMode"
-            />
+          <q-item-section side
+                          top>
+            <q-toggle color="primary"
+                      v-model="guiDarkMode"
+                      @update:model-value="setDarkMode" />
           </q-item-section>
         </q-item>
 
-        <q-item
-          v-if="matrixModeUnlocked"
-          class=""
-          v-ripple
-          clickable
-          @click="setMatrixMode(!guiMatrixMode)"
-        >
+        <q-item v-if="matrixModeUnlocked"
+                class=""
+                v-ripple
+                clickable
+                @click="setMatrixMode(!guiMatrixMode)">
           <q-item-section>
             <q-item-label>{{ $t("settings.matrixMode") }}</q-item-label>
           </q-item-section>
-          <q-item-section side top>
-            <q-toggle
-              color="primary"
-              v-model="guiMatrixMode"
-              @update:model-value="setMatrixMode"
-            />
+          <q-item-section side
+                          top>
+            <q-toggle color="primary"
+                      v-model="guiMatrixMode"
+                      @update:model-value="setMatrixMode" />
           </q-item-section>
         </q-item>
       </q-card-section>
@@ -200,106 +204,95 @@
           <span class="">{{ $t("settings.dataDescription") }}</span>
           <b>{{ modulesDataFolderPath }}</b>
         </div>
-        <q-btn
-          outline
-          :label="$t('settings.openDataFolder')"
-          class="fit q-mt-sm"
-          @click="openModulesDataFolder"
-        />
-        <q-btn
-          outline
-          :label="$t('settings.changeModulesDataLocation')"
-          class="fit q-mt-sm"
-          @click="selectFolderForModulesData"
-        />
-        <q-btn
-          outline
-          :label="$t('settings.deleteStatistics')"
-          color="negative"
-          class="fit q-mt-sm"
-          @click="deleteStatisticsDialog = true"
-        />
-        <q-btn
-          outline
-          :label="$t('settings.deleteModulesCache')"
-          color="negative"
-          class="fit q-mt-sm"
-          @click="deleteModuelsCacheDialog = true"
-        />
-        <q-btn
-          outline
-          :label="$t('settings.deleteAllTheData')"
-          color="negative"
-          class="fit q-mt-sm"
-          @click="deleteAllDataDialog = true"
-        />
+        <q-btn outline
+               :label="$t('settings.openDataFolder')"
+               class="fit q-mt-sm"
+               @click="openModulesDataFolder" />
+        <q-btn outline
+               :label="$t('settings.changeModulesDataLocation')"
+               class="fit q-mt-sm"
+               @click="selectFolderForModulesData" />
+        <q-btn outline
+               :label="$t('settings.deleteStatistics')"
+               color="negative"
+               class="fit q-mt-sm"
+               @click="deleteStatisticsDialog = true" />
+        <q-btn outline
+               :label="$t('settings.deleteModulesCache')"
+               color="negative"
+               class="fit q-mt-sm"
+               @click="deleteModuelsCacheDialog = true" />
+        <q-btn outline
+               :label="$t('settings.deleteAllTheData')"
+               color="negative"
+               class="fit q-mt-sm"
+               @click="deleteAllDataDialog = true" />
       </q-card-section>
     </q-card>
   </q-page>
 
   <q-dialog v-model="deleteStatisticsDialog">
-    <q-card class="q-pa-md" flat style="border: solid 3px red">
+    <q-card class="q-pa-md"
+            flat
+            style="border: solid 3px red">
       <q-card-section class="text-center text-h5 text-bold">
         {{ $t("settings.warnDelStatistics") }}
       </q-card-section>
       <q-card-actions>
-        <q-btn
-          label="Delete"
-          class="fit"
-          color="negative"
-          outline
-          @click="deleteStatistics"
-        />
+        <q-btn label="Delete"
+               class="fit"
+               color="negative"
+               outline
+               @click="deleteStatistics" />
       </q-card-actions>
     </q-card>
   </q-dialog>
 
   <q-dialog v-model="deleteModuelsCacheDialog">
-    <q-card class="q-pa-md" flat style="border: solid 3px red">
+    <q-card class="q-pa-md"
+            flat
+            style="border: solid 3px red">
       <q-card-section class="text-center text-h5 text-bold">
         {{ $t("settings.warnDelCache") }}
       </q-card-section>
       <q-card-actions>
-        <q-btn
-          label="Delete"
-          class="fit"
-          color="negative"
-          outline
-          @click="deleteModulesCache"
-        />
+        <q-btn label="Delete"
+               class="fit"
+               color="negative"
+               outline
+               @click="deleteModulesCache" />
       </q-card-actions>
     </q-card>
   </q-dialog>
 
   <q-dialog v-model="deleteAllDataDialog">
-    <q-card class="q-pa-md" flat style="border: solid 3px red">
+    <q-card class="q-pa-md"
+            flat
+            style="border: solid 3px red">
       <q-card-section class="text-center text-h5 text-bold">
         {{ $t("settings.warnDelData") }}
       </q-card-section>
       <q-card-actions>
-        <q-btn
-          label="Delete"
-          class="fit"
-          color="negative"
-          outline
-          @click="deleteAllData"
-        />
+        <q-btn label="Delete"
+               class="fit"
+               color="negative"
+               outline
+               @click="deleteAllData" />
       </q-card-actions>
     </q-card>
   </q-dialog>
 
-  <q-dialog v-model="matrixModeQuizDialog" persistent>
-    <MatrixModeQuizDialog
-      @on-close="
-        matrixModeQuizDialog = false;
-        void loadSettings();
-      "
-    />
+  <q-dialog v-model="matrixModeQuizDialog"
+            persistent>
+    <MatrixModeQuizDialog @on-close="
+      matrixModeQuizDialog = false;
+    void loadSettings();
+    " />
   </q-dialog>
 </template>
 
 <script lang="ts" setup>
-import { app } from "electron";
+// import { ipcRenderer } from "electron";
 import { useQuasar } from "quasar";
 import LanguageSelectorComponent from "./settings/LanguageSelectorComponent.vue";
 
@@ -329,8 +322,14 @@ async function setSystemHideInTray(newValue: boolean) {
   systemHideInTray.value = newValue;
 }
 
+const powerSaveBlocker = ref(false);
+async function setPowerSaveBlocker(newValue: boolean) {
+  ipcRenderer.send('toggle-power-save-block', powerSaveBlocker.value);
+  systemHideInTray.value = newValue;
+}
+
 const systemSheduleEnabled = ref(false);
-async function setSystemSheduleEnabled(newValue: boolean) {}
+async function setSystemSheduleEnabled(newValue: boolean) { }
 
 const sheduleStartTime = ref("08:00");
 const sheduleEndTime = ref("16:00");
@@ -339,7 +338,7 @@ const sheduleActivityOptions = ref([
   { label: "Minimal resource usage", value: "MINIMAL_USAGE" },
 ]);
 const sheduleActivity = ref("DO_NOTHING");
-async function setSheduleActivity() {}
+async function setSheduleActivity() { }
 
 const modulesDataFolderPath = ref("");
 async function selectFolderForModulesData() {
